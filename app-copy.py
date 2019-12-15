@@ -61,26 +61,6 @@ app.layout = html.Div(children=[
     html.Br(),
     html.A('See The Underlying Code On Github', href='https://github.com/lineality/intro_knn_plotly'),
 ])
-############ Interactive Callbacks
-# call back function, functions with decorators(specify input and output)
-@app.callback(Output('output-message', 'children'),
-            [Input('k-drop', 'value'),
-            Input('slider-1', 'value'),
-            Input('slider-2', 'value')
-            ])
-
-#
-def display_results(k, value0, value1):
-    # this opens the pickle
-    # the opposite of pickling the file
-    file = open(f'resources/model_k{k}.pkl', 'rb')
-    model=pickle.load(file)
-    file.close
-    new_obs=[[value0,value1]]
-    pred=model.predict(new_obs)
-    specieslist=['setosa', 'versicolor','verginica']
-    final_pred=specieslist[pred[0]]
-    return f'For a flower with sepal length {value0} and petal length {value1}, the predicted species is"{final_pred}"'
 
 ############ Execute the app
 if __name__ == '__main__':
